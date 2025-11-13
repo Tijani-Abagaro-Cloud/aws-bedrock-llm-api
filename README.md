@@ -64,3 +64,10 @@ Serverless architecture (API Gateway + Lambda)
 Calling AWS Bedrock (Claude 3) from Lambda
 
 Clean LLM microservice pattern
+
+👤 Author
+
+Tijani  Abagaro
+Principal AWS Solutions Architect | Cloud & GenAI Architect
+
+GitHub: Tijani-Abagaro-Cloud
