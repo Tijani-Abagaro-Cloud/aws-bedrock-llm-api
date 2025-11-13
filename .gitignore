@@ -8,14 +8,13 @@ __pycache__/
 venv/
 env/
 
+# CDK
+cdk.out/
+cdk.context.json
+
 # IDE
 .vscode/
 .idea/
-
-# Packaging
-build/
-dist/
-*.egg-info/
 
 # OS
 .DS_Store

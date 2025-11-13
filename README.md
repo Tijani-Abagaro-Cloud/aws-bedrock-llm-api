@@ -1,19 +1,12 @@
-
 # aws-bedrock-llm-api
 
-A **serverless LLM API** built on **AWS Bedrock**, **Lambda**, and **API Gateway**.
+A serverless **LLM API** built on **AWS Bedrock**, **Lambda**, **API Gateway**, and **CDK (Python)**.
 
-This project demonstrates how to expose a **Bedrock-powered Large Language Model (LLM)** as a simple HTTPS API — a common pattern for real-world GenAI applications.
-
-It is designed as a **portfolio / demo project** for:
-- GitHub
-- LinkedIn
-- Technical interviews
-- YouTube walkthroughs
+The goal of this project is to demonstrate a real-world **GenAI microservice** pattern on AWS that can be shared on GitHub, LinkedIn, and YouTube.
 
 ---
 
-##  High-Level Architecture
+##  Architecture
 
 ```text
 Client (Web / Postman / Curl)
@@ -27,92 +20,47 @@ AWS Lambda (Python)
         ▼
 AWS Bedrock (Claude 3 / LLM)
 
-
-API Gateway exposes a public HTTPS endpoint
-
-Lambda receives requests, validates input, calls Bedrock
-
-Bedrock generates the LLM response (e.g., Claude 3 Haiku)
-
-Response is returned as clean JSON
-
-## Project Structure
+📁 Project Structure
 aws-bedrock-llm-api/
 │
 ├── lambda/
-│   └── handler.py       # Lambda function calling AWS Bedrock
+│   └── handler.py          # Lambda code that calls AWS Bedrock
 │
-├── requirements.txt     # Python dependencies (for local use)
+├── cdk/
+│   ├── app.py              # CDK app entry
+│   ├── llm_api_stack.py    # CDK stack (API Gateway + Lambda + IAM)
+│   ├── requirements.txt    # CDK Python dependencies
+│   └── cdk.json
+│
 ├── .gitignore
 └── README.md
 
-## Lambda: LLM API Contract
+## Deploy with CDK (Python)
 
-Request (JSON body):
-
-{
-  "prompt": "Explain AWS Bedrock in simple terms"
-}
-
-
-Response (JSON):
-
-{
-  "model_id": "anthropic.claude-3-haiku-20240307",
-  "prompt": "Explain AWS Bedrock in simple terms",
-  "response": "AWS Bedrock is a fully managed service that lets you..."
-}
-
-🛠️ Local Setup (for exploration)
-
-Note: Real invocation of Bedrock requires:
-
-AWS credentials with bedrock:InvokeModel
-
-Bedrock enabled in your account/region
-
-Create and activate a virtual environment (optional but recommended):
-
-python -m venv venv
-source venv/bin/activate   # Linux / macOS
-# or
-venv\Scripts\activate      # Windows
-
-
-Install dependencies:
+From the cdk/ folder:
 
 pip install -r requirements.txt
 
+# One-time per account/region
+cdk bootstrap aws://YOUR-AWS-ACCOUNT-ID/us-east-1
 
-You can then import and test the handler locally using a sample event.
+# Deploy the stack
+cdk deploy
 
-## Example API Call (once wired to API Gateway)
-curl -X POST "https://your-api-id.execute-api.your-region.amazonaws.com/prod/chat" \
+
+After deployment, CDK will print the HTTP API endpoint URL.
+
+## Example Request
+curl -X POST "https://your-api-id.execute-api.us-east-1.amazonaws.com/chat" \
   -H "Content-Type: application/json" \
-  -d '{"prompt": "Give me 3 ideas for an AWS Bedrock demo project."}'
+  -d '{"prompt": "Explain AWS Bedrock in simple terms."}'
 
-## Why This Project Matters
+## What This Demonstrates
 
-This repo demonstrates:
+AWS CDK (Python) for Infrastructure as Code
 
-Practical LLM integration using AWS Bedrock
+Serverless architecture (API Gateway + Lambda)
 
-Serverless pattern with AWS Lambda + API Gateway
+Calling AWS Bedrock (Claude 3) from Lambda
 
-Clean Python implementation of an LLM-backed microservice
-
-Real-world GenAI architecture suitable for:
-
-Solution Architect interviews
-
-Senior/Principal Cloud roles
-
-Freelance / consulting portfolios
-
-
-👤 Author
-
-Tijani A. Abagaro
-Principal AWS Solutions Architect | Cloud & GenAI Architect
-
-GitHub: Tijani-Abagaro-Cloud
+Clean LLM microservice pattern
