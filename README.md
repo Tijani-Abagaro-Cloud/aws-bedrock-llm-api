@@ -8,7 +8,7 @@ The goal of this project is to demonstrate a real-world **GenAI microservice** p
 
 ##  Architecture
 
-```text
+
 Client (Web / Postman / Curl)
         │
         ▼
@@ -19,6 +19,9 @@ AWS Lambda (Python)
         │
         ▼
 AWS Bedrock (Claude 3 / LLM)
+
+
+
 
 📁 Project Structure
 aws-bedrock-llm-api/
@@ -35,11 +38,13 @@ aws-bedrock-llm-api/
 ├── .gitignore
 └── README.md
 
+
 ## Deploy with CDK (Python)
 
 From the cdk/ folder:
 
 pip install -r requirements.txt
+
 
 # One-time per account/region
 cdk bootstrap aws://YOUR-AWS-ACCOUNT-ID/us-east-1
@@ -54,6 +59,7 @@ After deployment, CDK will print the HTTP API endpoint URL.
 curl -X POST "https://your-api-id.execute-api.us-east-1.amazonaws.com/chat" \
   -H "Content-Type: application/json" \
   -d '{"prompt": "Explain AWS Bedrock in simple terms."}'
+  
 
 ## What This Demonstrates
 
@@ -64,6 +70,7 @@ Serverless architecture (API Gateway + Lambda)
 Calling AWS Bedrock (Claude 3) from Lambda
 
 Clean LLM microservice pattern
+
 
 👤 Author
 
